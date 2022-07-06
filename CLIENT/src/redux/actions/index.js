@@ -53,13 +53,11 @@ export const ADMIN_GET_ALL_EMPLOYEE = "ADMIN_GET_ALL_EMPLOYEE";
 
 export const CITAS_EMPLEADO = "CITAS_EMPLEADO";
 
-
 export const CONSTOCK_SINSTOCK = "CONSTOCK_SINSTOCK";
 export const USUARIOS_BANEADOS = "USUARIOS_BANEADOS";
 export const VENTAS_TRANSACCION = "VENTAS_TRANSACCION";
 
 export const FILTER_RANGE = "FILTER_RANGE";
-
 
 // all products carga todos los productos que estan activos solo activos
 export function allProductos() {
@@ -152,13 +150,13 @@ export function addEmployee(employee) {
     const resp = await fetchConToken("employee", employee, "POST");
     const data = await resp.json();
     if (data.ok) {
-      Swal.fire('Sucess', 'Empleado creado correctamente', 'success')
+      Swal.fire("Sucess", "Empleado creado correctamente", "success");
       return dispatch({
         type: ADD_EMPLOYEE,
         payload: data.newEmployee,
       });
-    }else{
-      Swal.fire('Error', data.msg, 'error')
+    } else {
+      Swal.fire("Error", data.msg, "error");
     }
   };
 }
@@ -264,7 +262,7 @@ export function allBarberos() {
   return async (dispatch) => {
     const resp = await fetchSinToken("employee");
     const data = await resp.json();
-    console.log(data)
+    console.log(data);
     if (data.ok) {
       return dispatch({
         type: ALL_BARBEROS,
@@ -360,7 +358,8 @@ export const paymentMP = async (items, user, navigate, emptyCart) => {
 
   const token = localStorage.getItem("token");
   const response = await fetch(
-    "https://barber-app-henry.herokuapp.com/api/purchaseOrder",
+    //"https://barber-app-henry.herokuapp.com/api/purchaseOrder",
+    "http://localhost:3001/api/purchaseOrder",
     {
       method: "POST",
       body: JSON.stringify(carrito),
@@ -401,10 +400,6 @@ export function revalidarAuth() {
         dispatch(allCitasAdmin());
       }
       dispatch(allCitas());
-
-
-
-
 
       return dispatch({
         type: types.login,
@@ -686,7 +681,6 @@ export function EliminarCita(id) {
   };
 }
 
-
 export function getConStockSinStock(productos, data1, data2) {
   return async function(dispatch) {
     productos.map((producto) => {
@@ -730,8 +724,8 @@ export function getVentasUsuarios() {
     }
   };
 }
-export const filterRange = (products) =>{
-  return (dispatch) =>{
-    dispatch({type: FILTER_RANGE, payload:products})
-  }
-}
+export const filterRange = (products) => {
+  return (dispatch) => {
+    dispatch({ type: FILTER_RANGE, payload: products });
+  };
+};

@@ -1,5 +1,5 @@
-const baseUrl = `https://barber-app-henry.herokuapp.com/api`;
-// const baseUrl = `http://localhost:8080/api`;
+//const baseUrl = `https://barber-app-henry.herokuapp.com/api`;
+const baseUrl = `http://localhost:3001/api`;
 
 //ESTE SIRVE DE ALGO???????????
 export const fetchSinToken = (endpoint, data, method = "GET") => {
@@ -40,18 +40,17 @@ export const fetchConToken = (endpoint, data, method = "GET") => {
   }
 };
 
-export const fetchConTokenFiles = (endpoint, files, method = 'POST') => {
+export const fetchConTokenFiles = (endpoint, files, method = "POST") => {
   const url = `${baseUrl}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
-  const formData = new FormData()
-  formData.append('archivo', files)
+  const formData = new FormData();
+  formData.append("archivo", files);
   return fetch(url, {
     method,
     headers: {
-      'x-token': token
+      "x-token": token,
     },
     body: formData,
-    redirect: 'follow'
+    redirect: "follow",
   });
-
-}
+};
